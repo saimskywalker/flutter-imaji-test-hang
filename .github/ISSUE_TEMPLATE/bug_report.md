@@ -7,7 +7,7 @@ labels: bug
 **Command you ran**
 
 ```
-dart run test_hang_guard ...
+dart run imaji_test_hang ...
 ```
 
 **The source it was run against**
@@ -22,12 +22,12 @@ dart run test_hang_guard ...
 **What the tool printed**
 
 <!-- Paste it verbatim, including the exit code:
-     dart run test_hang_guard test; echo "exit $?" -->
+     dart run imaji_test_hang test; echo "exit $?" -->
 
 **What you expected instead**
 
 **Environment**
 
-- `test_hang_guard` version:
+- `imaji_test_hang` version:
 - Dart version:
 - Host platform (macOS / Linux / Windows):

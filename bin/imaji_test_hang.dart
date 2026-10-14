@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:args/args.dart';
-import 'package:test_hang_guard/test_hang_guard.dart';
+import 'package:imaji_test_hang/imaji_test_hang.dart';
 
 const _version = '0.1.0';
 
@@ -45,7 +45,7 @@ ArgParser buildParser() => ArgParser()
   ..addFlag('version', negatable: false, help: 'Print the version.');
 
 String usage(ArgParser parser) =>
-    'Usage: test_hang_guard [options] [paths...]\n'
+    'Usage: imaji_test_hang [options] [paths...]\n'
     '\n'
     'Fails on the patterns that deadlock a Flutter test isolate. Scans\n'
     '${defaultPaths.map((d) => '$d/').join(', ')} when no path is given.\n'
@@ -62,7 +62,7 @@ void main(List<String> args) {
   try {
     argv = parser.parse(args);
   } on FormatException catch (e) {
-    stderr.writeln('test_hang_guard: ${e.message}\n');
+    stderr.writeln('imaji_test_hang: ${e.message}\n');
     stderr.writeln(usage(parser));
     exit(exitUsage);
   }
@@ -72,7 +72,7 @@ void main(List<String> args) {
     exit(exitClean);
   }
   if (argv.flag('version')) {
-    stdout.writeln('test_hang_guard $_version');
+    stdout.writeln('imaji_test_hang $_version');
     exit(exitClean);
   }
 
@@ -95,7 +95,7 @@ void main(List<String> args) {
       ignoreMarker: argv.option('ignore-marker') ?? defaultIgnoreMarker,
     );
   } on ArgumentError catch (e) {
-    stderr.writeln('test_hang_guard: --ignore-marker ${e.message}');
+    stderr.writeln('imaji_test_hang: --ignore-marker ${e.message}');
     exit(exitUsage);
   }
 
