@@ -13,7 +13,8 @@
   runs no timers. It does fire: `package:test` arms it in the root zone,
   outside the fake clock. The real problem is that a `testWidgets` test gets
   ten minutes under `flutter test` (none under `flutter run`), so a hang is
-  reported late, per stuck test, and some hangs never reach it.
+  reported late, per stuck test, and some hangs never reach it. The README's
+  opening paragraph and the pubspec description now say the same.
 - Documentation: the two rules have different scopes, and the docs now say so.
   `awaited-teardown-in-run-async` applies inside a `runAsync(...)` closure
   wherever it appears, including a `setUp` with no `testWidgets` around it;

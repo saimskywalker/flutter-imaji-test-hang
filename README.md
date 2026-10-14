@@ -3,10 +3,12 @@
 [![pub package](https://img.shields.io/pub/v/imaji_test_hang.svg)](https://pub.dev/packages/imaji_test_hang)
 [![pub points](https://img.shields.io/pub/points/imaji_test_hang)](https://pub.dev/packages/imaji_test_hang/score)
 
-**Your Flutter test suite hangs. `flutter test` prints nothing, names no file,
-and sits there until the CI job timeout kills it.** No stack trace, no failing
-test name, no output at all — just a job that ran for 60 minutes and then went
-red for "The operation was canceled."
+**Your Flutter test suite hangs. `flutter test` prints nothing and names no
+file.** A stuck `testWidgets` test sits silent for ten minutes, then fails with
+a `TimeoutException` that names the test but not the line or the `await` that
+never returned. A few of those and the CI job hits its own limit and goes red
+for "The operation was canceled." Under `flutter run` there is no timeout at
+all, and some hangs never reach it.
 
 This finds the cause by reading the source, before the suite runs. It takes
 about two seconds and it names the file and the line.
