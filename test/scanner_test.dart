@@ -80,6 +80,21 @@ testWidgets('t', (tester) async {
       expect(violations, isEmpty);
     });
 
+    test('is flagged in a runAsync with no testWidgets body around it', () {
+      // The rule is gated on the runAsync closure alone, not on a widget test
+      // body: a setUp fixture that tears a player down this way wedges the
+      // same way. The README and CHANGELOG describe the scope this test pins.
+      final violations = scan('''
+setUp(() async {
+  await tester.runAsync(() async {
+    await audioPlayer.dispose();
+  });
+});
+''');
+      expect(violations.map((v) => v.rule), [Violation.teardownInRunAsync]);
+      expect(violations.single.line, 3);
+    });
+
     test('a teardown outside runAsync is left alone', () {
       // Outside runAsync the teardown is driven by pump(), which is the fix the
       // rule asks for — flagging it here would flag the remedy.

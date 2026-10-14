@@ -58,6 +58,11 @@ const exitUsage = 2;
 /// rather than adding to it, so a project can narrow a rule as easily as it
 /// can widen one. Passing an empty list disables the rule that uses it.
 class HangRules {
+  /// Creates a rule set, using the default for every list left `null`.
+  ///
+  /// A supplied list replaces its default; an empty one disables the rule that
+  /// uses it. Throws an [ArgumentError] if [ignoreMarker] is blank, because a
+  /// blank marker would suppress every finding.
   HangRules({
     List<String>? teardownReceivers,
     List<String>? teardownMethods,

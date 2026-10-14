@@ -1,5 +1,9 @@
 /// One flagged line: a pattern that can wedge the test isolate.
 class Violation {
+  /// Creates a finding for [line] of [file], matched by [rule].
+  ///
+  /// The scanner builds these; construct one yourself only to feed the report
+  /// formatting or a test.
   const Violation({
     required this.file,
     required this.line,
