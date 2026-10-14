@@ -1,11 +1,17 @@
 name: imaji_test_hang
 description: >-
   Fails a Flutter test suite fast on the patterns that deadlock the test
-  isolate, instead of letting the run hang with no output until the CI job
-  timeout kills it.
-version: 0.1.0
+  isolate, instead of letting the run hang silently for minutes with no file
+  or line named.
+version: 0.1.1
 repository: https://github.com/saimskywalker/flutter-imaji-test-hang
 issue_tracker: https://github.com/saimskywalker/flutter-imaji-test-hang/issues
+topics:
+  - testing
+  - flutter
+  - ci
+  - lint
+  - static-analysis
 
 environment:
   sdk: ^3.5.0

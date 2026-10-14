@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:args/args.dart';
 import 'package:imaji_test_hang/imaji_test_hang.dart';
 
-const _version = '0.1.0';
+const _version = '0.1.1';
 
 ArgParser buildParser() => ArgParser()
   ..addMultiOption(
