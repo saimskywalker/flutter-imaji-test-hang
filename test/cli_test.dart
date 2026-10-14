@@ -10,7 +10,7 @@ import 'package:test/test.dart';
 /// the same reason the pattern-list options needed a process-level check.
 ProcessResult runCli(List<String> args) => Process.runSync(
       Platform.resolvedExecutable,
-      ['run', 'bin/test_hang_guard.dart', ...args],
+      ['run', 'bin/imaji_test_hang.dart', ...args],
     );
 
 void main() {

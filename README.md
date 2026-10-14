@@ -1,4 +1,4 @@
-# test_hang_guard
+# imaji_test_hang — catch Flutter test deadlocks before CI hangs
 
 **Your Flutter test suite hangs. `flutter test` prints nothing, names no file,
 and sits there until the CI job timeout kills it.** No stack trace, no failing
@@ -9,7 +9,7 @@ This finds the cause by reading the source, before the suite runs. It takes
 about two seconds and it names the file and the line.
 
 ```
-test_hang_guard: 1 pattern(s) that can WEDGE THE TEST ISOLATE and hang the whole suite with no error.
+imaji_test_hang: 1 pattern(s) that can WEDGE THE TEST ISOLATE and hang the whole suite with no error.
 
 test/player_test.dart:7  [awaited-teardown-in-run-async]
   await audioPlayer.dispose();
@@ -48,17 +48,17 @@ it.
 Not on pub.dev yet, so it installs from git.
 
 ```bash
-dart pub global activate --source git https://github.com/saimskywalker/test-hang-guard.git
+dart pub global activate --source git https://github.com/saimskywalker/flutter-imaji-test-hang.git
 ```
 
 That puts the executable in `$HOME/.pub-cache/bin`. If that is not on your
 `PATH`, either add it or call the tool through pub — `dart pub global run
-test_hang_guard` — which needs no `PATH` change.
+imaji_test_hang` — which needs no `PATH` change.
 
 Then, from your Flutter package root:
 
 ```bash
-test_hang_guard
+imaji_test_hang
 ```
 
 Or without installing it globally — add it as a dev dependency and run it from
@@ -66,26 +66,32 @@ the package:
 
 ```yaml
 dev_dependencies:
-  test_hang_guard:
-    git: https://github.com/saimskywalker/test-hang-guard.git
+  imaji_test_hang:
+    git: https://github.com/saimskywalker/flutter-imaji-test-hang.git
 ```
 
 ```bash
 dart pub get
-dart run test_hang_guard
+dart run imaji_test_hang
 ```
 
-Once it is published, `dart pub global activate test_hang_guard` and
-`dart pub add --dev test_hang_guard` will be the shorter forms of the same two
+Once it is published, `dart pub global activate imaji_test_hang` and
+`dart pub add --dev imaji_test_hang` will be the shorter forms of the same two
 routes.
+
+**Renamed from `test_hang_guard`.** A global install still puts a
+`test_hang_guard` command on `PATH` next to `imaji_test_hang`, so a CI step that
+calls the old command keeps working. A dev dependency has to be renamed in
+`pubspec.yaml`, and `dart run test_hang_guard` becomes `dart run
+imaji_test_hang`. The `// no-hang-check` marker is unchanged.
 
 ## Usage
 
 ```bash
-test_hang_guard                            # scans test/
-test_hang_guard test integration_test      # scans both
-test_hang_guard test/features/player       # one directory
-test_hang_guard test/player_test.dart      # one file
+imaji_test_hang                            # scans test/
+imaji_test_hang test integration_test      # scans both
+imaji_test_hang test/features/player       # one directory
+imaji_test_hang test/player_test.dart      # one file
 ```
 
 ## In CI
@@ -113,7 +119,7 @@ jobs:
       - run: flutter pub get
 
       # Before the suite, not after. Seconds, and it names the file and line.
-      - run: dart run test_hang_guard test
+      - run: dart run imaji_test_hang test
 
       - run: flutter test
 ```
@@ -122,15 +128,15 @@ Without the dev dependency, install it inside the job instead — this needs no
 change to the package's `pubspec.yaml`:
 
 ```yaml
-      - run: dart pub global activate --source git https://github.com/saimskywalker/test-hang-guard.git
-      - run: dart pub global run test_hang_guard test
+      - run: dart pub global activate --source git https://github.com/saimskywalker/flutter-imaji-test-hang.git
+      - run: dart pub global run imaji_test_hang test
 ```
 
 Two things to know before the step goes red on you:
 
 - **Exit code 2 is not a finding.** It means the scan could not run, and by far
   the most common cause is naming a path the package does not have —
-  `test_hang_guard test integration_test` in a package with no
+  `imaji_test_hang test integration_test` in a package with no
   `integration_test/` exits 2 without scanning anything. Name only the
   directories that exist.
 - **Nothing here needs a Flutter SDK.** The scan reads source text, so on a
@@ -142,7 +148,7 @@ GitLab CI, or any runner that speaks shell:
 test:
   script:
     - flutter pub get
-    - dart run test_hang_guard test
+    - dart run imaji_test_hang test
     - flutter test
 ```
 
@@ -253,7 +259,7 @@ its own; a body declared by `testWidgetsWithHarness(...)` is invisible to the
 default.
 
 ```bash
-test_hang_guard \
+imaji_test_hang \
   --async-symbol=DraftStore \
   --test-function=testWidgets --test-function=testWidgetsWithHarness \
   test
@@ -273,7 +279,7 @@ The scanner works on source held in memory, so it can back an editor
 integration or a custom check:
 
 ```dart
-import 'package:test_hang_guard/test_hang_guard.dart';
+import 'package:imaji_test_hang/imaji_test_hang.dart';
 
 final violations = scanLines('player_test.dart', source.split('\n'), HangRules());
 for (final v in violations) {

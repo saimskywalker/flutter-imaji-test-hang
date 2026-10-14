@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:test/test.dart';
-import 'package:test_hang_guard/test_hang_guard.dart';
+import 'package:imaji_test_hang/imaji_test_hang.dart';
 
 const _hangingTest = '''
 import 'package:flutter_test/flutter_test.dart';
@@ -33,7 +33,7 @@ void main() {
   late StringBuffer err;
 
   setUp(() {
-    root = Directory.systemTemp.createTempSync('test_hang_guard_');
+    root = Directory.systemTemp.createTempSync('imaji_test_hang_');
     out = StringBuffer();
     err = StringBuffer();
   });

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Renamed from `test_hang_guard` to `imaji_test_hang` (repository
+  `saimskywalker/flutter-imaji-test-hang`). The library import is now
+  `package:imaji_test_hang/imaji_test_hang.dart`. A global install still puts
+  a `test_hang_guard` command on `PATH` alongside `imaji_test_hang`, so
+  existing CI steps that call the old name keep working. The
+  `// no-hang-check` marker is unchanged.
 - Refuse a blank `--ignore-marker` instead of accepting it. Every line
   contains the empty string, so a blank marker suppressed every finding and
   the scan still reported "no hang patterns found" — a gate reporting clean

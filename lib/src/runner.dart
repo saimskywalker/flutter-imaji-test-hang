@@ -34,7 +34,7 @@ int run({
     } else if (file.existsSync()) {
       files.add(file);
     } else {
-      err.writeln('test_hang_guard: no such file or directory: $path');
+      err.writeln('imaji_test_hang: no such file or directory: $path');
       return exitUsage;
     }
   }
@@ -68,13 +68,13 @@ int report({
 }) {
   if (violations.isEmpty) {
     out.writeln(
-      'test_hang_guard: $fileCount file(s) scanned, no hang patterns found.',
+      'imaji_test_hang: $fileCount file(s) scanned, no hang patterns found.',
     );
     return exitClean;
   }
 
   err.writeln(
-    '\ntest_hang_guard: ${violations.length} pattern(s) that can WEDGE THE '
+    '\nimaji_test_hang: ${violations.length} pattern(s) that can WEDGE THE '
     'TEST ISOLATE and hang the whole suite with no error.\n',
   );
   for (final violation in violations) {

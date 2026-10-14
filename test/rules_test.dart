@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:test_hang_guard/test_hang_guard.dart';
+import 'package:imaji_test_hang/imaji_test_hang.dart';
 
 List<Violation> scan(String source, HangRules rules) =>
     scanLines('fixture.dart', source.split('\n'), rules);

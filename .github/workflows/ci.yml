@@ -57,10 +57,10 @@ jobs:
 
           expect_exit() {
             local want="$1"; shift
-            dart run bin/test_hang_guard.dart "$@"
+            dart run bin/imaji_test_hang.dart "$@"
             local got=$?
             if [ "$got" -ne "$want" ]; then
-              echo "::error::test_hang_guard $* exited $got, wanted $want"
+              echo "::error::imaji_test_hang $* exited $got, wanted $want"
               exit 1
             fi
           }

@@ -1,10 +1,11 @@
-name: test_hang_guard
+name: imaji_test_hang
 description: >-
   Fails a Flutter test suite fast on the patterns that deadlock the test
   isolate, instead of letting the run hang with no output until the CI job
   timeout kills it.
 version: 0.1.0
-repository: https://github.com/saimskywalker/test-hang-guard
+repository: https://github.com/saimskywalker/flutter-imaji-test-hang
+issue_tracker: https://github.com/saimskywalker/flutter-imaji-test-hang/issues
 
 environment:
   sdk: ^3.5.0
@@ -17,4 +18,7 @@ dev_dependencies:
   test: ^1.25.0
 
 executables:
-  test_hang_guard: test_hang_guard
+  imaji_test_hang: imaji_test_hang
+  # The name this tool had before it was renamed, kept so existing CI steps and
+  # scripts that call `test_hang_guard` keep working.
+  test_hang_guard: imaji_test_hang
